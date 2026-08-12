@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "https://genai-resume-analyzer-tnm3.onrender.com/<your-api-route>",
+    baseURL: "https://genai-resume-analyzer-tnm3.onrender.com",
     withCredentials: true,
 })
 
