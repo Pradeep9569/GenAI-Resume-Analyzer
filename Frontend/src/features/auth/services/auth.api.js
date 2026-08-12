@@ -1,66 +1,75 @@
-import axios from "axios"
-
+import axios from "axios";
 
 const api = axios.create({
     baseURL: "https://genai-resume-analyzer-tnm3.onrender.com",
     withCredentials: true
-})
+});
 
 export async function register({ username, email, password }) {
-
     try {
-        const response = await api.post('/api/auth/register', {
-            username, email, password
-        })
+        const response = await api.post("/api/auth/register", {
+            username,
+            email,
+            password
+        });
 
-        return response.data
-
+        return response.data;
     } catch (err) {
+        console.error(
+            "Register error:",
+            err.response?.data || err.message
+        );
 
-        console.log(err)
-
+        throw err;
     }
-
 }
 
 export async function login({ email, password }) {
-
     try {
-
         const response = await api.post("/api/auth/login", {
-            email, password
-        })
+            email,
+            password
+        });
 
-        return response.data
-
+        return response.data;
     } catch (err) {
-        console.log(err)
-    }
+        console.error(
+            "Login error:",
+            err.response?.data || err.message
+        );
 
+        throw err;
+    }
 }
 
 export async function logout() {
     try {
+        const response = await api.get("/api/auth/logout");
 
-        const response = await api.get("/api/auth/logout")
-
-        return response.data
-
+        return response.data;
     } catch (err) {
+        console.error(
+            "Logout error:",
+            err.response?.data || err.message
+        );
 
+        throw err;
     }
 }
 
 export async function getMe() {
-
     try {
+        const response = await api.get("/api/auth/get-me");
 
-        const response = await api.get("/api/auth/get-me")
-
-        return response.data
-
+        return response.data;
     } catch (err) {
-        console.log(err)
-    }
+        console.error(
+            "Get Me error:",
+            err.response?.data || err.message
+        );
 
+        throw err;
+    }
 }
+
+export default api;
